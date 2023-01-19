@@ -43,6 +43,8 @@ class AbsenController extends Controller
                 'id_karyawan' => $r->id_karyawan,
                 'status' => $r->status,
                 'tgl' => $r->tgl,
+                'jam_masuk' => $r->jam_masuk,
+                'jam_keluar' => $r->jam_keluar,
                 'id_lokasi' => $r->id_lokasi,
                 'admin' => Auth::user()->name,
             ]);

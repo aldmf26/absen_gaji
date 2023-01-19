@@ -47,13 +47,13 @@
                             <input type="date" class="form-control" name="tgl2">
                         </div>
                         <div class="col-lg-1">
-                            <label for=""> </label>
-                            <button type="submit" class="btn btn-md btn-primary" style="margin-top: 33px">View</button>
+                            <label for="">&nbsp;</label>
+                            <button type="submit" class="btn btn-md btn-primary">View</button>
                         </div>
                         <div class="col-lg-2">
-                            <label for=""> </label>
+                            <label for="">&nbsp;</label><br>
                             <a href="{{ route('export', ['tgl1' => $tgl1, 'tgl2' => $tgl2, 'jenis' => $jenis]) }}"
-                                target="_blank" style="margin-top: 33px" class="btn btn-md btn-success"><i
+                                target="_blank" class="btn btn-md btn-success"><i
                                     class="fa fa-file-pdf"></i> Export</a>
                         </div>
                     </div>
@@ -79,19 +79,37 @@
                                 <th>I</th>
                                 <th>S</th>
                                 <th>OFF</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($hasil as $h)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $h->nm_karyawan }}</td>
-                                    <td>{{ $h->posisi }}</td>
-                                    <td>{{ $h->ttl_absen_m ? $h->ttl_absen_m : 0 }}</td>
-                                    <td>{{ $h->ttl_absen_i ? $h->ttl_absen_i : 0 }}</td>
-                                    <td>{{ $h->ttl_absen_s ? $h->ttl_absen_s : 0 }}</td>
-                                    <td>{{ $h->ttl_absen_off ? $h->ttl_absen_off : 0 }}</td>
-                                </tr>
+                            @php
+                                $ttl = $h->ttl_absen_m + $h->ttl_absen_i + $h->ttl_absen_s + $h->ttl_absen_off;
+                            @endphp
+                            @if ($ttl != 0)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $h->nm_karyawan }}</td>
+                                <td>{{ $h->posisi }}</td>
+                                <td>{{ $h->ttl_absen_m ? $h->ttl_absen_m : 0 }}</td>
+                                <td>{{ $h->ttl_absen_i ? $h->ttl_absen_i : 0 }}</td>
+                                <td>{{ $h->ttl_absen_s ? $h->ttl_absen_s : 0 }}</td>
+                                <td>{{ $h->ttl_absen_off ? $h->ttl_absen_off : 0 }}</td>
+                                @php
+                                    $dataGet = [
+                                        'tgl1' => $tgl1,
+                                        'tgl2' => $tgl2,
+                                        'id_karyawan' => $h->id,
+                                        'nama' => $h->nm_karyawan,
+                                        'posisi' => $h->posisi
+                                    ]
+                                @endphp
+                                <td>
+                                    <a target="_blank" href="{{ route('printAbsen', $dataGet) }}" class="btn btn-primary btn-sm"><i class="fa fa-print"></i></a>
+                                </td>
+                            </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -107,6 +125,7 @@
                                 <th>TTL</th>
                                 <th><span class="text-danger">Denda / Kasbon</span></th>
                                 <th>Total Gaji</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -114,7 +133,7 @@
                                 @php
                                     $denda = DB::selectOne("SELECT sum(a.jumlah) as jumlah FROM tb_denda as a
                                     left JOIN tb_gaji as b on a.id_karyawan = b.id_karyawan
-                                    WHERE a.tgl BETWEEN '$tgl1' AND '$tgl2' AND a.id_karyawan = '$g->id'
+                                    WHERE a.tgl BETWEEN '$tgl1' AND '$tgl2' AND a.id_karyawan = '$g->id' 
                                     GROUP BY a.id_karyawan");
                                     $jmlDenda = $denda == '' ? 0 : $denda->jumlah;
                                     
@@ -123,8 +142,13 @@
                                     WHERE a.tgl BETWEEN '$tgl1' AND '$tgl2' AND a.id_karyawan = '$g->id'
                                     GROUP BY a.id_karyawan");
                                     $jmlKasbon = $kasbon == '' ? 0 : $kasbon->jumlah;
-                                    
+                                    $totalTotal = $g->ttl_gaji - $jmlDenda - $jmlKasbon;
                                 @endphp
+                                @if ($g->ttl_absen_m == 0)
+                                @php
+                                    continue;
+                                @endphp
+                                @else
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $g->nm_karyawan }}</td>
@@ -135,8 +159,12 @@
                                     <td><span class="text-danger">(
                                             {{ number_format($jmlDenda, 0) }} / {{ number_format($jmlKasbon, 0) }}
                                             )</span></td>
-                                    <td>{{ number_format($g->ttl_gaji - $jmlDenda - $jmlKasbon, 0) }} </td>
+                                    <td>{{ number_format($totalTotal, 0) }} </td>
+                                    <td>
+                                        <a href="{{ route('kwitansiGaji', ['nama' => $g->nm_karyawan, 'total' => $totalTotal, 'tgl1' => $tgl1, 'tgl2' => $tgl2,'jabatan' => $g->posisi,'denda' =>$jmlDenda, 'kasbon' => $jmlKasbon]) }}" target="_blank" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></a>
+                                    </td>
                                 </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

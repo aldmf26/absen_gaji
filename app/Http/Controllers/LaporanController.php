@@ -347,4 +347,35 @@ class LaporanController extends Controller
 
         return view('laporan.lapAbsen.export', $data);
     }
+
+    public function kwitansiGaji(Request $r)
+    {
+        $data = [
+            'title' => 'Kwitansi Gaji Karyawan',
+            'nama' => $r->nama,
+            'total' => $r->total,
+            'tgl1' => $r->tgl1,
+            'tgl2' => $r->tgl2,
+            'denda' => $r->denda,
+            'kasbon' => $r->kasbon,
+            'posisi' => $r->jabatan,
+        ];
+        return view('laporan.kwitansi', $data);
+    }
+
+    public function printAbsen(Request $r)
+    {
+        $detail = DB::table('tb_absen as a')->join('karyawans as b', 'a.id_karyawan', 'b.id')->join('tb_lokasi as c', 'a.id_lokasi', 'c.id_lokasi')->where('b.id', $r->id_karyawan)->get();
+        
+        $data = [
+            'title' => 'Detail Absen',
+             'tgl1' => $r->tgl1,
+            'tgl2' => $r->tgl2,
+            'detail' => $detail,
+            'nama' => $r->nama,
+            'posisi' => $r->posisi,
+        ];
+
+        return view('laporan.absenDetail', $data);
+    }
 }

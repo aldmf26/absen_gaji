@@ -18,6 +18,8 @@
                                 <th>#</th>
                                 <th>Nama</th>
                                 <th>Tanggal</th>
+                                <th>Jam Masuk</th>
+                                <th>Jam Keluar</th>
                                 <th>Keterangan</th>
                                 <th>Lokasi</th>
                                 <th>Aksi</th>
@@ -33,6 +35,8 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $k->nm_karyawan }}</td>
                                     <td>{{ $k->tgl }}</td>
+                                    <td>{{ $k->jam_masuk }}</td>
+                                    <td>{{ $k->jam_keluar }}</td>
                                     <td>{{ $k->status }}</td>
                                     <td>{{ $k->nm_gudang }}</td>
                                     <td>
@@ -113,6 +117,18 @@
                                         <option value="{{ $s->status }}">{{ $s->status }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="col-lg-3 mt-2">
+                                <div class="form-group">
+                                    <label for="">Jam Masuk</label>
+                                    <input type="time" class="form-control" name="jam_masuk">
+                                </div>
+                            </div>
+                            <div class="col-lg-3 mt-2">
+                                <div class="form-group">
+                                    <label for="">Jam Keluar</label>
+                                    <input type="time" class="form-control" name="jam_keluar">
+                                </div>
                             </div>
                         </div>
                     </div>

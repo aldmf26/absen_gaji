@@ -114,6 +114,7 @@ function tgl_indo($tanggal)
 </style>
 
 <body>
+    <div class="container">
     <p>
         <img style="float: left; max-width: 100%;" src="{{ asset('assets/img/logo.jpg') }}" alt="" width="90"
             height="90">
@@ -129,6 +130,6 @@ function tgl_indo($tanggal)
     <div id="title">
         {{ $title }}
     </div>
-
+</div>
     <br>
     <div id="isi">

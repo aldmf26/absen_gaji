@@ -9,7 +9,5 @@ class Absen extends Model
 {
     use HasFactory;
     protected $table = 'tb_absen';
-    protected $fillable = [
-        'id_karyawan', 'tgl', 'status', 'id_lokasi', 'admin'
-    ];
+    protected $guarded = [];
 }

@@ -84,6 +84,8 @@ Route::get('hapusDenda', [DendaController::class, 'hapusDenda'])->name('hapusDen
 
 Route::get('view', [LaporanController::class, 'view'])->name('view')->middleware('auth');
 Route::get('export', [LaporanController::class, 'export'])->name('export')->middleware('auth');
+Route::get('kwitansiGaji', [LaporanController::class, 'kwitansiGaji'])->name('kwitansiGaji')->middleware('auth');
+Route::get('printAbsen}', [LaporanController::class, 'printAbsen'])->name('printAbsen')->middleware('auth');
 
 Route::get('laporanKaryawan', [LaporanController::class, 'laporanKaryawan'])->name('laporanKaryawan')->middleware('auth');
 Route::get('exportKaryawan', [LaporanController::class, 'exportKaryawan'])->name('exportKaryawan')->middleware('auth');

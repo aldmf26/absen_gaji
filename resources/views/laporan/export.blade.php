@@ -47,6 +47,7 @@
         <tbody>
             @php
                 $no = 1;
+                $ttlGaji = 0;
             @endphp
             @foreach ($hasil as $g)
             @php
@@ -63,19 +64,34 @@
             $jmlKasbon = $kasbon == '' ? 0 : $kasbon->jumlah;
             
         @endphp
-                <tr>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ $g->nm_karyawan }}</td>
-                    <td>{{ $g->posisi }}</td>
-                    <td>{{ number_format($g->rp_gaji, 0) }}</td>
-                    <td>{{ $g->ttl_absen_m == 0 ? 0 : $g->ttl_absen_m }}</td>
-                    <td>{{ number_format($g->rp_gaji * $g->ttl_absen_m, 0) }}</td>
-                    <td><span class="text-danger">(
-                            {{ number_format($jmlDenda, 0) }} / {{ number_format($jmlKasbon, 0) }}
-                            )</span></td>
-                    <td>{{ number_format($g->ttl_gaji - $jmlDenda - $jmlKasbon, 0) }} </td>
-                </tr>
+        @if ($g->ttl_absen_m == 0)
+        @php
+            continue;
+        @endphp
+        @else
+        @php
+            $ttlGaji += $g->rp_gaji * $g->ttl_absen_m;
+        @endphp
+        <tr>
+            <td>{{ $no++ }}</td>
+            <td>{{ $g->nm_karyawan }}</td>
+            <td>{{ $g->posisi }}</td>
+            <td>{{ number_format($g->rp_gaji, 0) }}</td>
+            <td>{{ $g->ttl_absen_m == 0 ? 0 : $g->ttl_absen_m }}</td>
+            <td>{{ number_format($g->rp_gaji * $g->ttl_absen_m, 0) }}</td>
+            <td><span class="text-danger">(
+                    {{ number_format($jmlDenda, 0) }} / {{ number_format($jmlKasbon, 0) }}
+                    )</span></td>
+            <td>{{ number_format($g->ttl_gaji - $jmlDenda - $jmlKasbon, 0) }} </td>
+            
+        </tr>
+        @endif
             @endforeach
+            <tr>
+                <td colspan="6"></td>
+                <td><b>Total</b></td>
+                <td><b>{{ number_format($ttlGaji,0) }}</b></td>
+            </tr>
         </tbody>
     </table>
 @endif
