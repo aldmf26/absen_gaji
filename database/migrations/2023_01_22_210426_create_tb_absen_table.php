@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTbStatus extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateTbStatus extends Migration
      */
     public function up()
     {
-        Schema::create('tb_status', function (Blueprint $table) {
-            $table->integerIncrements('id_status');
+        Schema::create('tb_absen', function (Blueprint $table) {
+            $table->increments('id_absen');
+            $table->integer('id_karyawan');
             $table->string('status');
-            $table->string('ket');
+            $table->date('tgl');
+            $table->integer('id_lokasi');
+            $table->string('admin', 100);
+            $table->time('jam_masuk');
+            $table->time('jam_keluar');
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ class CreateTbStatus extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_status');
+        Schema::dropIfExists('tb_absen');
     }
-}
+};
