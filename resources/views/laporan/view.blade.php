@@ -101,7 +101,7 @@
                                 <td>{{ $h->ttl_absen_off ? $h->ttl_absen_off : 0 }}</td>
                                 <td>{{ $h->total_jam_masuk_count ?? 0 }}</td>
                                 <td>{{ $h->total_jam_keluar_count ?? 0 }}</td>
-                                <td>{{ $h->total_lembur ?? 0 }}</td>
+                                <td>{{ $h->total_lembur ?? 0 }} Jam</td>
                                 @php
                                     $dataGet = [
                                         'tgl1' => $tgl1,
