@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,21 @@ Route::get('/', function () {
   ];
   return view('login.login', $data);
 })->name('/');
+
+Route::get('signature', function () {
+  return view('signature');
+}); 
+Route::post('saveSignature', function (Request $r) {
+  $folderPath = public_path('upload/');
+  $image_parts = explode(";base64,", $r->signed);
+  $image_type_aux = explode("image/", $image_parts[0]);
+  $image_type = $image_type_aux[1];
+  $image_base64 = base64_decode($image_parts[1]);
+  $file = $folderPath . uniqid() . '.'.$image_type;
+  file_put_contents($file, $image_base64);
+	    
+	    return back()->with('success', 'success');
+})->name('saveSignature'); 
 
 Route::get('welcome', function () {
   $data = [

@@ -36,14 +36,25 @@ class LaporanController extends Controller
         } elseif ($menu == 'rAbsen') {
             $title = 'Rekap Absen';
             $jenis = 'absen';
-            $query = DB::select("SELECT a.*,SUM(d.qty_m) as ttl_absen_m, SUM(d.qty_i) as ttl_absen_i, SUM(d.qty_s) as ttl_absen_s, SUM(d.qty_off) as ttl_absen_off FROM `karyawans` as a
+            $query = DB::select("SELECT SUM(d.jam_masuk_count) as total_jam_masuk_count,
+                                        SUM(d.jam_keluar_count) as total_jam_keluar_count,
+                                        d.lembur as total_lembur,
+                                        a.*,
+                                        SUM(d.qty_m) as ttl_absen_m, 
+                                        SUM(d.qty_i) as ttl_absen_i, 
+                                        SUM(d.qty_s) as ttl_absen_s, 
+                                        SUM(d.qty_off) as ttl_absen_off 
+                                        FROM `karyawans` as a
             LEFT JOIN tb_gaji as b ON a.id = b.id_karyawan
             LEFT JOIN 
             (SELECT c.id_karyawan, c.status, 
              IF(c.status = 'M', COUNT(c.status),0) as qty_m,
              IF(c.status = 'I', COUNT(c.status),0) as qty_i,
              IF(c.status = 'S', COUNT(c.status),0) as qty_s,
-              IF(c.status = 'OFF', COUNT(c.status),0) as qty_off
+              IF(c.status = 'OFF', COUNT(c.status),0) as qty_off,
+              COUNT(IF(c.status = 'M' AND c.jam_masuk IS NOT NULL, 1, NULL)) as jam_masuk_count,
+            COUNT(IF(c.status = 'M' AND c.jam_keluar IS NOT NULL, 1, NULL)) as jam_keluar_count,
+            SUM(GREATEST(TIMESTAMPDIFF(HOUR, c.jam_masuk, c.jam_keluar) - 8, 0)) as lembur
              FROM tb_absen as c WHERE c.tgl BETWEEN '$tgl1' AND '$tgl2' GROUP BY c.id_karyawan, c.status) as d on a.id = d.id_karyawan 
                         GROUP BY a.id");
         }
@@ -365,11 +376,11 @@ class LaporanController extends Controller
 
     public function printAbsen(Request $r)
     {
-        $detail = DB::table('tb_absen as a')->join('karyawans as b', 'a.id_karyawan', 'b.id')->join('tb_lokasi as c', 'a.id_lokasi', 'c.id_lokasi')->where('b.id', $r->id_karyawan)->get();
-        
+        $detail = DB::table('tb_absen as a')->join('karyawans as b', 'a.id_karyawan', 'b.id')->join('tb_lokasi as c', 'a.id_lokasi', 'c.id_lokasi')->where('b.id', $r->id_karyawan)->whereBetween('tgl', [$r->tgl1, $r->tgl2])->get();
+
         $data = [
             'title' => 'Detail Absen',
-             'tgl1' => $r->tgl1,
+            'tgl1' => $r->tgl1,
             'tgl2' => $r->tgl2,
             'detail' => $detail,
             'nama' => $r->nama,

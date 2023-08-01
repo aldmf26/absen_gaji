@@ -79,6 +79,9 @@
                                 <th>I</th>
                                 <th>S</th>
                                 <th>OFF</th>
+                                <th>Jam Masuk</th>
+                                <th>Jam Keluar</th>
+                                <th>Lembur</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -96,6 +99,9 @@
                                 <td>{{ $h->ttl_absen_i ? $h->ttl_absen_i : 0 }}</td>
                                 <td>{{ $h->ttl_absen_s ? $h->ttl_absen_s : 0 }}</td>
                                 <td>{{ $h->ttl_absen_off ? $h->ttl_absen_off : 0 }}</td>
+                                <td>{{ $h->total_jam_masuk_count ?? 0 }}</td>
+                                <td>{{ $h->total_jam_keluar_count ?? 0 }}</td>
+                                <td>{{ $h->total_lembur ?? 0 }}</td>
                                 @php
                                     $dataGet = [
                                         'tgl1' => $tgl1,
