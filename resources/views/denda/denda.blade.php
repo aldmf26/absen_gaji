@@ -11,7 +11,7 @@
                     @else
                         <div class="card-header">
                             <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#tambah"><i
-                                    class="fa fa-plus"></i> Tambah Denda</button>
+                                    class="fa fa-plus"></i> Tambah Ganti Rugi</button>
                         </div>
                     @endif
                     <div class="card-body">
@@ -76,7 +76,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content modal-md">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tambah Denda</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Ganti Rugi</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -124,7 +124,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content modal-md">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Denda</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Ganti Rugi</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

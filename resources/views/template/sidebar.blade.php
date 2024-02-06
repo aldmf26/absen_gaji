@@ -46,7 +46,7 @@
             <li class="nav-item {{ Request::is('denda') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('denda') }}">
                     <i class="fas fa-file-invoice-dollar"></i>
-                    <span>Data Denda</span></a>
+                    <span>Ganti Rugi</span></a>
             </li>
             <li class="nav-item {{ Request::is('user') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('user') }}">
@@ -82,7 +82,7 @@
                         <a class="collapse-item {{ Request::is('kasbon') ? 'active' : '' }}"
                             href="{{ route('kasbon') }}">Data Kasbon</a>
                         <a class="collapse-item {{ Request::is('denda') ? 'active' : '' }}"
-                            href="{{ route('denda') }}">Data Denda</a>
+                            href="{{ route('denda') }}">Ganti Rugi</a>
                         <a class="collapse-item {{ Request::is('status') ? 'active' : '' }}"
                             href="{{ route('status') }}">Status Absen</a>
                         <a class="collapse-item {{ Request::is('lokasi') ? 'active' : '' }}"
@@ -107,7 +107,7 @@
                             <a class="collapse-item {{ Request::is('lapKasbon') ? 'active' : '' }}"
                                 href="{{ route('lapKasbon') }}">Rekap Kasbon</a>
                             <a class="collapse-item {{ Request::is('lapDenda') ? 'active' : '' }}"
-                                href="{{ route('lapDenda') }}">Rekap Denda</a>
+                                href="{{ route('lapDenda') }}">Rekap Ganti Rugi</a>
                         <a class="collapse-item {{ Request::is('lapKaryawan') ? 'active' : '' }}"
                             href="{{ route('lapKaryawan') }}">Data Karyawan</a>
                         <a class="collapse-item {{ Request::is('lapAbsen') ? 'active' : '' }}"
@@ -115,7 +115,7 @@
                         <a class="collapse-item {{ Request::is('lapDataKasbon') ? 'active' : '' }}"
                             href="{{ route('lapDataKasbon') }}">Data Kasbon</a>
                         <a class="collapse-item {{ Request::is('lapDataDenda') ? 'active' : '' }}"
-                            href="{{ route('lapDataDenda') }}">Data Denda</a>
+                            href="{{ route('lapDataDenda') }}">Ganti Rugi</a>
                         <a class="collapse-item {{ Request::is('laporanKaryawan') ? 'active' : '' }}"
                             href="{{ route('laporanKaryawan') }}">Gaji Karyawan</a>
                         <a class="collapse-item {{ Request::is('laporanLokasi') ? 'active' : '' }}"
@@ -147,7 +147,7 @@
                             <a class="collapse-item {{ Request::is('lapKasbon') ? 'active' : '' }}"
                                 href="{{ route('lapKasbon') }}">Rekap Kasbon</a>
                             <a class="collapse-item {{ Request::is('lapDenda') ? 'active' : '' }}"
-                                href="{{ route('lapDenda') }}">Rekap Denda</a>
+                                href="{{ route('lapDenda') }}">Rekap Ganti Rugi</a>
                         <a class="collapse-item {{ Request::is('lapKaryawan') ? 'active' : '' }}"
                             href="{{ route('lapKaryawan') }}">Data Karyawan</a>
                         <a class="collapse-item {{ Request::is('lapAbsen') ? 'active' : '' }}"
@@ -155,7 +155,7 @@
                         <a class="collapse-item {{ Request::is('lapDataKasbon') ? 'active' : '' }}"
                             href="{{ route('lapDataKasbon') }}">Data Kasbon</a>
                         <a class="collapse-item {{ Request::is('lapDataDenda') ? 'active' : '' }}"
-                            href="{{ route('lapDataDenda') }}">Data Denda</a>
+                            href="{{ route('lapDataDenda') }}">Ganti Rugi</a>
                         <a class="collapse-item {{ Request::is('laporanKaryawan') ? 'active' : '' }}"
                             href="{{ route('laporanKaryawan') }}">Gaji Karyawan</a>
                         <a class="collapse-item {{ Request::is('laporanLokasi') ? 'active' : '' }}"

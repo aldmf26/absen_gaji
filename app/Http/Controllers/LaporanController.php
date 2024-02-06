@@ -150,7 +150,7 @@ class LaporanController extends Controller
     public function exportKaryawan(Request $r)
     {
         $data = [
-            'title' => 'Laporan Karyawan',
+            'title' => 'Laporan Rekap Gaji Karyawan',
             'gaji' => Gaji::join('karyawans', 'karyawans.id', 'tb_gaji.id_karyawan')->orderBy('tb_gaji.id_gaji', 'DESC')->get(),
             'karyawan' => Karyawan::all(),
         ];
@@ -249,7 +249,7 @@ class LaporanController extends Controller
             $tgl2 = $r->tgl2;
         }
         $data = [
-            'title' => 'Rekap Denda',
+            'title' => 'Rekap Ganti Rugi',
             'denda' => DB::select("SELECT a.tgl, b.nm_karyawan, sum(a.jumlah) as jumlah, COUNT(a.id_karyawan) as ttl  FROM `tb_denda` as a
             LEFT JOIN karyawans as b ON a.id_karyawan = b.id
             WHERE a.tgl BETWEEN '$tgl1' AND '$tgl2'
@@ -270,7 +270,7 @@ class LaporanController extends Controller
             $tgl2 = $r->tgl2;
         }
         $data = [
-            'title' => 'Rekap Denda',
+            'title' => 'Rekap Ganti Rugi',
             'denda' => DB::select("SELECT a.tgl, b.nm_karyawan, sum(a.jumlah) as jumlah, COUNT(a.id_karyawan) as ttl  FROM `tb_denda` as a
             LEFT JOIN karyawans as b ON a.id_karyawan = b.id
             WHERE a.tgl BETWEEN '$tgl1' AND '$tgl2'
@@ -286,7 +286,7 @@ class LaporanController extends Controller
     {
 
         $data = [
-            'title' => 'Laporan Denda',
+            'title' => 'Laporan Ganti Rugi',
             'denda' => Denda::join('karyawans', 'tb_denda.id_karyawan', 'karyawans.id')->orderBy('tb_denda.id_denda', 'DESC')->get()
         ];
         return view('laporan.lapDenda.viewData', $data);
@@ -295,7 +295,7 @@ class LaporanController extends Controller
     public function exportLapDataDenda(Request $r)
     {
         $data = [
-            'title' => 'Laporan Denda',
+            'title' => 'Laporan Ganti Rugi',
             'denda' => Denda::join('karyawans', 'tb_denda.id_karyawan', 'karyawans.id')->orderBy('tb_denda.id_denda', 'DESC')->get()
         ];
 

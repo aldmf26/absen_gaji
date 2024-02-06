@@ -17,7 +17,7 @@ class DendaController extends Controller
             $denda = Denda::join('karyawans', 'tb_denda.id_karyawan', 'karyawans.id')->orderBy('tb_denda.id_denda', 'DESC')->get();
         }
         $data = [
-            'title' => 'Data Denda',
+            'title' => 'Data Ganti Rugi',
             'denda' => $denda,
             'karyawan' => Karyawan::all(),
         ];
