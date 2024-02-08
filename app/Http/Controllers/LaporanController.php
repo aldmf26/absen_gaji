@@ -160,7 +160,7 @@ class LaporanController extends Controller
     public function lapKaryawan(Request $r)
     {
         $data = [
-            'title' => 'Laporan Data Karyawan',
+            'title' => 'Laporan Karyawan',
             'karyawan' => Karyawan::orderBy('id', 'desc')->get(),
 
         ];
@@ -170,7 +170,7 @@ class LaporanController extends Controller
     public function exportLapKaryawan(Request $r)
     {
         $data = [
-            'title' => 'Laporan Data Karyawan',
+            'title' => 'Laporan Karyawan',
             'karyawan' => Karyawan::orderBy('id', 'desc')->get(),
 
         ];
