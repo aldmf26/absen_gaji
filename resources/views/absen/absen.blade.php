@@ -72,7 +72,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" x-data="{ statusSelect: 'M' }">
                         <div class="row">
                             <div class="col-lg-3">
                                 <label for="">Tanggal</label>
@@ -111,20 +111,20 @@
                             </div>
                             <div class="col-lg-2">
                                 <label for="">Status</label>
-                                <select name="status" id="" class="form-control">
+                                <select x-model="statusSelect" name="status" id="" class="form-control">
                                     <option value="">- Status -</option>
                                     @foreach ($status as $s)
-                                        <option value="{{ $s->status }}">{{ $s->status }}</option>
+                                        <option  value="{{ $s->status }}">{{ $s->status }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-lg-3 mt-2">
+                            <div class="col-lg-3 mt-2" x-show="statusSelect === 'M'">
                                 <div class="form-group">
                                     <label for="">Jam Masuk</label>
                                     <input type="time" class="form-control" name="jam_masuk">
                                 </div>
                             </div>
-                            <div class="col-lg-3 mt-2">
+                            <div class="col-lg-3 mt-2" x-show="statusSelect === 'M'">
                                 <div class="form-group">
                                     <label for="">Jam Keluar</label>
                                     <input type="time" class="form-control" name="jam_keluar">

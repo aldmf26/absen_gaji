@@ -23,10 +23,12 @@
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('assets') }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
 
     {{-- select2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="{{ asset('js/app.js') }}" defer></script>
+
 </head>
 
 <body id="page-top">

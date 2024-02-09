@@ -150,7 +150,7 @@ class LaporanController extends Controller
     public function exportKaryawan(Request $r)
     {
         $data = [
-            'title' => 'Laporan Rekap Gaji Karyawan',
+            'title' => 'Laporan Gaji Karyawan',
             'gaji' => Gaji::join('karyawans', 'karyawans.id', 'tb_gaji.id_karyawan')->orderBy('tb_gaji.id_gaji', 'DESC')->get(),
             'karyawan' => Karyawan::all(),
         ];
